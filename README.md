@@ -10,21 +10,57 @@ Reinforcement learning project training a Unitree G1 humanoid robot to place an 
 
 ## Installation
 
-```bash
-# Install dependencies
-pip install -r requirements.txt
+### 1. System Dependencies
 
-# Download the environment asset
+```bash
+# Update package lists
+sudo apt update
+
+# Install ffmpeg (required for video rendering)
+sudo apt install -y ffmpeg
+
+# Optional: Make 'python' command available
+sudo apt install -y python-is-python3
+```
+
+### 2. Python Dependencies
+
+```bash
+# Install all Python packages (includes setuptools<70 for sapien compatibility)
+pip install -r requirements.txt
+```
+
+### 3. Download Environment Asset
+
+```bash
+# Download the Unitree G1 robot and environment assets
 python -m mani_skill.utils.download_asset UnitreeG1PlaceAppleInBowl-v1
 ```
 
 ## Usage
 
-Launch the training notebook:
+### Quick Start
 
 ```bash
+# Launch Jupyter
 jupyter notebook rl_humanoid_apple.ipynb
 ```
+
+Then in the notebook:
+1. ✅ **Run** Part 1: Setup and Imports
+2. ❌ **Skip** Part 2: Environment Exploration (creates GPU PhysX conflict)
+3. ✅ **Run** Part 3 onwards: Training
+
+> ⚠️ **Important:** Do not run Part 2 before training. The exploration cells initialize GPU PhysX which can only be initialized once per Python session.
+
+### Troubleshooting
+
+| Error | Solution |
+|-------|----------|
+| `No module named 'pkg_resources'` | Already fixed in requirements.txt (`setuptools<70`) |
+| `ffmpeg not found` | Run `sudo apt install ffmpeg` |
+| `GPU PhysX can only be enabled once` | Skip Part 2 in notebook, restart kernel |
+| `mat1 and mat2 must have the same dtype` | Fixed - use updated notebook |
 
 ## Hyperparameters
 
@@ -58,10 +94,6 @@ jupyter notebook rl_humanoid_apple.ipynb
 ├── requirements.txt
 ├── rl_humanoid_apple.ipynb       # Main training notebook
 ├── rl_humanoid_apple.py          # Training script export
-├── rl_pushcube_lab.ipynb         # PushCube task notebook
-├── rl_pushcube_lab.py            # PushCube script export
-├── Robotics Simulation.ipynb     # General simulation tutorial
-└── Robotics Simulation.py        # Tutorial script export
 ```
 
 ## Credits
