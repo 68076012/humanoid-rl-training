@@ -21,6 +21,8 @@ sudo apt install -y ffmpeg
 
 # Optional: Make 'python' command available
 sudo apt install -y python-is-python3
+
+apt install python3-pip
 ```
 
 ### 2. Python Dependencies
@@ -28,6 +30,8 @@ sudo apt install -y python-is-python3
 ```bash
 # Install all Python packages (includes setuptools<70 for sapien compatibility)
 pip install -r requirements.txt
+
+pip install --upgrade mani_skill torch
 ```
 
 ### 3. Download Environment Asset
